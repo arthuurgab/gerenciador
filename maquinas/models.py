@@ -1,4 +1,6 @@
 from django.db import models
+from modelos.models import models, Modelos
+
 
 class Maquina(models.Model):
     # Define o Status da Máquina
@@ -9,52 +11,41 @@ class Maquina(models.Model):
 
     id = models.AutoField(primary_key=True, unique=True, auto_created=True)
     apelido = models.CharField(max_length=250, blank=False, help_text="Define o Apelido (Nome) da Máquina")
-    serie = models.IntegerField(unique=True, null=False, help_text="Define o Número de Série da Máquina")
-    tipo = models.CharField(max_length=250, blank=False, help_text="Define o Tipo da Máquina")
-    fabricante = models.CharField(max_length=250, blank=True, help_text="Define o Fabricante da Máquina")
-    modelo = models.CharField(max_length=250, blank=False, help_text="Define o Fabricante da Máquina")
-    status = models.IntegerField(choices=status, default=1, help_text="Define o Status da Máquina, por Padrão Ativa (1)")
-    data = models.DateField(null=False, blank=False, help_text="Define o Data da Instalação da Máquina")
+    modelo = models.ForeignKey(Modelos, on_delete=models.CASCADE, help_text="Define o Modelo da Máquina")
+    anoFabricacao = models.IntegerField(null=False, help_text="Define ano de Fabricação da Máquina")
+    numeroSerie = models.IntegerField(unique=True, null=False, help_text="Define o Número de Série da Máquina")
+    dataStartup = models.DateField(null=False, blank=False, help_text="Define o Data da Instalação da Máquina")
     custo = models.FloatField(null=False, blank=True, help_text="Define o Custo da Máquina")
-    local = models.CharField(max_length=250, blank=True, help_text="Define onde a Máquina foi Instalda - Local/Setor")
+    status = models.IntegerField(choices=status, default=1, help_text="Define o Status da Máquina, por Padrão Ativa (1)")
 
     def __str__(self):
-        return str(self.apelido)
-
+        return str(self.numeroSerie)
 
 class Especificacoes(models.Model):
     # Define as Voltagens Comuns
-    volts = (
-        (110, '110V'),
-        (220, '220V'),
-        (240, '240V'),
-        (380, '380V'),
-        (415, '415V'),
-        (440, '440V'),
-        (480, '480V'),
-        (600, '600V'),
+    power = (
+        (480, '480Vac'),
+        (460, '460Vac'),
+        (440, '440Vac'),
+        (415, '415Vac'),
+        (400, '400Vac'),
+        (380, '380Vac'),
+        (240, '240Vac'),
+        (220, '220Vac'),
+        (208, '208Vac'),
     )
 
-    # Define a Tipo de Controle
-    controle = (
-        (0, "Manual"),
-        (1, "Automatico"),
-        (2, "Hibrido"),
-    )
+    if Modelos == 'DC 1.50':
+        altura = '2760 mm'
+        comprimento = '8000 mm'
+        largura = '3880 mm'
+        forno = '1500 mm'
 
-    maquina = models.ForeignKey(Maquina, on_delete=models.CASCADE)
-    voltagem = models.IntegerField(choices=volts, help_text="Define a voltagem da Máquina")
-    controle = models.IntegerField(choices=controle, default=1, help_text="Define o Tipo de Controle da Máquina")
-
-    # Capacidade da Máquina
-    peso = models.FloatField(null=False, blank=True, help_text="Define o Peso da Máquina")
-    velocidade = models.IntegerField(null=False, blank=True, help_text="Define a Velocidade da Máquina")
-    potencia = models.IntegerField(null=False, blank=True, help_text="Define a Potencia da Máquina")
-
-    # Dimensões da Máquina
-    altura = models.FloatField(null=False, blank=True, help_text="Define o Peso da Máquina")
-    largura = models.FloatField(null=False, blank=True, help_text="Define a Velocidade da Máquina")
-    profundidade = models.FloatField(null=False, blank=True, help_text="Define a Potencia da Máquina")
+    id = models.AutoField(primary_key=True, unique=True, auto_created=True)
+    inputPower = models.IntegerField(choices=power, null=False, help_text="Define a Tensão de Entrada da Máquina")
+    instaledPower = models.IntegerField(null=False, help_text="Define a Tensão Instalada pelo Cliente")
+    pressao = models.IntegerField(null=False, help_text="Define a Pressão Instalada pelo Cliente")
+    local = models.CharField(max_length=250, blank=True, help_text="Define onde a Máquina foi Instalda - Local/Setor")
 
     def __str__(self):
         return str(self.maquina)
