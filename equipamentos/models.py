@@ -13,4 +13,4 @@ class Equipamentos(models.Model):
     comprimento = models.FloatField(null=True, help_text="Define o Comprimento do Equipamento")
 
     def __str__(self):
-        return str(f"{self.apelido} - {self.maquina}" )
+        return str(f"{self.apelido} - {self.maquina}")

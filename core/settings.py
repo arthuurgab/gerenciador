@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'maquinas',
     'modelos',
     'equipamentos',
+    'manutencao',
 
 ]
 
