@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'painel',
     'maquinas',
     'modelos',
+    'equipamentos',
+
 ]
 
 MIDDLEWARE = [
