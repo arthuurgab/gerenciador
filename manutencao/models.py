@@ -58,5 +58,7 @@ class ManutencaoMaquina(models.Model):
     ferramentasMecanicas = models.IntegerField(choices=YouN, null=False, help_text="Certificar-se de que todas as ferramentas de manutenção estão calibradas e em bom estado.")
     ferramentasEletricas = models.IntegerField(choices=YouN, null=False, help_text="Verificar se todos os equipamentos de medição e controle usados durante a manutenção estão funcionando corretamente.")
 
+    imagem = models.ImageField(upload_to=None, height_field=None, width_field=None)
+
     def __str__(self):
-        return str(f"{self.maquina} - {self.dataManutencao}")
+        return str(f"{self.maquina} ({self.dataManutencao})")

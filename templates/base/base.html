@@ -1,10 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css"  rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+
+</head>
+<body style="background-color: #f8f9fa">
+     <!-- Navbar -->
+    <nav class="bg-blue-900 p-4 fixed w-full z-10 top-0">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-white font-bold text-xl">Logo</a>
+            <div class="flex items-center">
+                <a href="#" class="text-white px-4">Home</a>
+                <a href="#" class="text-white px-4">About</a>
+                <a href="#" class="text-white px-4">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex">
+        <!-- Sidebar Container -->
+        <div id="sidebar" class="bg-blue-800 text-white w-64 space-y-6 py-7 px-2 fixed inset-y-0 left-0 z-10">
+            <!-- Sidebar Content -->
+            <a href="#" class="text-white flex items-center space-x-2 px-4 py-2">
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="text-white flex items-center space-x-2 px-4 py-2">
+                <span>Settings</span>
+            </a>
+            <a href="#" class="text-white flex items-center space-x-2 px-4 py-2">
+                <span>Profile</span>
+            </a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 ml-64">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </div>
 </body>
 </html>

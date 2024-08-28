@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'modelos',
     'equipamentos',
     'manutencao',
+    'widget_tweaks',
+    'crispy_forms',
 
 ]
 
