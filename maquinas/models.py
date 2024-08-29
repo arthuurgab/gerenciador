@@ -27,19 +27,12 @@ class Maquina(models.Model):
     numeroSerie = models.CharField(max_length=10, unique=True, null=False, help_text="Define o Número de Série da Máquina")
     dataStartup = models.DateField(null=False, blank=False, help_text="Define o Data da Instalação da Máquina")
     custo = models.FloatField(null=False, blank=True, help_text="Define o Custo da Máquina")
-    status = models.IntegerField(choices=STATUS_CHOICES, default=1,
-                                 help_text="Define o Status da Máquina, por Padrão Ativa (1)")
+    status = models.IntegerField(choices=STATUS_CHOICES, default=1, help_text="Define o Status da Máquina, por Padrão Ativa (1)")
 
     # Especificações
-    inputPower = models.IntegerField(choices=POWER_CHOICES, null=False,
-                                     help_text="Define a Tensão de Entrada da Máquina")
-
+    inputPower = models.IntegerField(choices=POWER_CHOICES, null=False, help_text="Define a Tensão de Entrada da Máquina")
     instaledPower = models.IntegerField(null=False, help_text="Define a Tensão Instalada pelo Cliente")
     pressao = models.IntegerField(null=False, help_text="Define a Pressão Instalada pelo Cliente")
-    altura = models.FloatField(null=False, help_text="Define a Altura da Máquina")
-    largura = models.FloatField(null=False, help_text="Define a Largura da Máquina")
-    comprimento = models.FloatField(null=False, help_text="Define o Comprimento da Máquina")
-    forno = models.FloatField(null=False, help_text="Define o Tamanho do Forno")
 
     def __str__(self):
         return str(self.numeroSerie)
