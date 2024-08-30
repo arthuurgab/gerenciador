@@ -1,0 +1,75 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<table class="bg-white shadow-lg w-full">
+    <tbody>
+    {% for e in exibeMaquina %}
+        <tr class="hover:bg-gray-100">
+            <td class="py-2 px-4">
+                {% if e.status == 1 %}
+                  <span class="inline-block px-2 py-1 text-sm font-semibold text-green-800 bg-green-100">
+                      <i class="bx bx-check-circle"></i>
+                </span>
+                {% elif e.status == 0 %}
+                <span class="inline-block px-2 py-1 text-sm font-semibold text-red-800 bg-red-100">
+                  <i class="bx bx-minus-circle"></i>
+                </span>
+                {% endif %}
+            </td>
+            <td class="py-2 px-4">
+                <span class="inline-block px-2 py-1 text-sm font-semibold text-blue-800 bg-blue-100">{{ e.numeroSerie }}</span>
+            </td>
+            <td class="p-3 ">
+                {% if e.status == 0 %}
+                    <a href="{% url 'desativa' e.id %}" class="text-gray-400 hover:text-green-300 mr-2">
+                        <i class="bx bx-block text-base"> Ativar</i>
+                    </a>
+                {% elif e.status == 1 %}
+                    <a href="{% url 'desativa' e.id %}" class="text-gray-400 hover:text-red-300 mr-2">
+                        <i class="bx bx-block text-base"> Desativa</i>
+                    </a>
+                {% endif %}
+                <button type="button" class="text-gray-400 hover:text-red-600 mr-2" onclick="deletar('{{ e.id }}')">
+                    <i class="bx bxs-trash text-base"> Deletar</i>
+                </button>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<script>
+function deletar(id) {
+    Swal.fire({
+        title: 'Deseja excluir a máquina?',
+        text: "Esta ação não pode ser desfeita!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Excluir',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "{% url 'deletar' %}",
+                type: "POST",
+                data: {
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                    'id': id,
+                },
+                success: function () {
+                    Swal.fire(
+                        'Excluído!',
+                        'A máquina foi excluída com sucesso.',
+                        'success'
+                    ).then(() => {
+                        // Redireciona após o sucesso
+                        window.location.href = "{% url 'createMaq' %}";
+                    });
+                },
+            })
+        }
+    });
+}
+</script>

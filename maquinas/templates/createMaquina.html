@@ -4,7 +4,6 @@
 {% block content %}
 <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
 
-
 <section class="pb-20 relative block ">
     <div class="container mx-auto px-4 lg:pt-24 lg:pb-64">
         <div class="flex flex-wrap text-center justify-center ">
@@ -52,7 +51,7 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full lg:w-3/12 px-4 p-4 text-center shadow-lg rounded-lg cursor-pointer bg-blueGray-200 hover:bg-yellow-100">
+            <button type="button" class="w-full lg:w-3/12 px-4 p-4 text-center shadow-lg rounded-lg cursor-pointer bg-blueGray-200 hover:bg-yellow-100" data-modal-target="edita-modal" data-modal-toggle="edita-modal">
                 <div class="text-blueGray-800 p-3 w-12 h-12 shadow-lg rounded-full bg-white inline-flex items-center justify-center">
                     <i class='bx bxs-edit text-2xl' style='color:#000000'></i>
                 </div>
@@ -62,8 +61,30 @@
                 <p class="mt-2 mb-4 text-blueGray-400">
                     Atualize as informações das máquinas existentes conforme necessário. Edite dados como número de série ou características para manter o registro atualizado.
                 </p>
+            </button>
+            <div id="edita-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div class="relative p-4 w-3/12	">
+                    <!-- Modal content -->
+                    <div class="relative bg-gray-100 rounded-lg shadow dark:bg-gray-700">
+                        <!-- Modal header -->
+                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                Editar Máquina
+                            </h3>
+                            <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="edita-modal">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <div class="p-4 md:p-5">
+                            {% include 'modais/edita.html' %}
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="w-full lg:w-3/12 px-4 p-4 text-center shadow-lg rounded-lg cursor-pointer bg-blueGray-200 hover:bg-red-100">
+            <button type="button" class="w-full lg:w-3/12 px-4 p-4 text-center shadow-lg rounded-lg cursor-pointer bg-blueGray-200 hover:bg-red-100" data-modal-target="delete-modal" data-modal-toggle="delete-modal">
                 <div class="text-blueGray-800 p-3 w-12 h-12 shadow-lg rounded-full bg-white inline-flex items-center justify-center">
                     <i class='bx bx-x text-2xl'></i>
                 </div>
@@ -71,6 +92,28 @@
                 <p class="mt-2 mb-4 text-blueGray-400">
                     Remova máquinas que não são mais utilizadas ou que foram substituídas. Confirme a exclusão para evitar a perda de dados importantes.
                 </p>
+            </button>
+            <div id="delete-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div class="relative p-4 w-3/12	">
+                    <!-- Modal content -->
+                    <div class="relative bg-gray-100 rounded-lg shadow dark:bg-gray-700">
+                        <!-- Modal header -->
+                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                Deletar Máquina
+                            </h3>
+                            <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="delete-modal">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <div class="p-4 md:p-5">
+                            {% include 'modais/deletar.html' %}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -82,12 +125,12 @@
                 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200">
                     <div class="flex-auto p-5 lg:p-10">
                         <div class="relative w-full mb-3 mt-8">
-                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Apelido</label>
-                            {% render_field form.apelido class+="form-control border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %}
+                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Pesquisa</label>
+                            {% render_field MaquinaForm.apelido class+="form-control border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %}
                         </div>
 
                         <button class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
-                            Send Message
+                            Pesquisar
                         </button>
                     </div>
                 </div>

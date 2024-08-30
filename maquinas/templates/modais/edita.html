@@ -1,0 +1,55 @@
+{% load widget_tweaks %}
+<form method="post" action="#">
+    {% csrf_token %}
+    <div class="flex-auto p-5 lg:p-10">
+        <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Apelido</label>
+            {% render_field MaquinaForm.apelido class+="form-control border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %}
+        </div>
+        <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Modelo</label>
+            {% render_field MaquinaForm.modelo class+="form-control border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %}
+        </div>
+        <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">N° Serie</label>
+            {% render_field MaquinaForm.numeroSerie class+="form-control border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %}
+        </div>
+        <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Data de Fabricação</label>
+            {% render_field MaquinaForm.dataFabricacao class+="form-control border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %}
+        </div>
+        <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Data de Startup</label>
+            {% render_field MaquinaForm.dataStartup class+="form-control border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %}
+        </div>
+        <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Custo</label>
+            {% render_field MaquinaForm.custo class+="form-control border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %}
+        </div>
+        <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Status</label>
+            {% render_field MaquinaForm.status class+="form-control border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %}
+        </div>
+        <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Tensão da Máquina (Vendida)</label>
+            {% render_field MaquinaForm.inputPower  class+="form-control border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %}
+        </div>
+        <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Tensão da Máquina (Instalada)</label>
+            {% render_field MaquinaForm.instaledPower class+="form-control border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %}
+        </div>
+        <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Pressão</label>
+            {% render_field MaquinaForm.pressao class+="form-control border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %}
+        </div>
+        {% for e in exibeMaquina %}
+            <a href="{% url 'edita' e.id %}" class="editamaquina bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="submit" data-value="{{ e.id }}">
+                SALVAR ALTERAÇÕES
+            </a>
+        {% endfor %}
+    </div>
+</form>
+
+<script>
+
+</script>
