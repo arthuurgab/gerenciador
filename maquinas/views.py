@@ -1,11 +1,8 @@
-
-from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404, reverse
-from django.template.context_processors import request
-
 from maquinas.models import Maquina
 from .forms import MaquinaForm
+from .forms import MaquinaUpdate
 
 def maquinas(request):
     return render(request, "maquinas.html")
@@ -24,27 +21,19 @@ def createMaquina(request):
 
 
 def createUpdate(request, id):
-    # Obtém a máquina a ser atualizada
     maquina = get_object_or_404(Maquina, id=id)
-
+    print(maquina)
     if request.method == "POST":
-        # Cria um formulário com os dados enviados pelo usuário
-        form = MaquinaForm(request.POST, instance=maquina)
+        form = MaquinaUpdate(request.POST, instance=maquina)
 
         if form.is_valid():
-            # Atualiza a instância de Maquina com os novos dados
             form.save()
-            # Redireciona para a mesma view após a atualização
             return redirect(reverse('createMaq'))
     else:
-        # Cria um formulário com os dados da máquina existente
-        form = MaquinaForm(instance=maquina)
+        form = MaquinaUpdate(instance=maquina)
 
-    # Carrega todas as máquinas para exibição
     maquinas = Maquina.objects.order_by('numeroSerie')
-    return render(request, 'createMaquina.html', {"form": form, "exibeMaquina": maquinas, "edit_mode": True})
-
-
+    return JsonResponse()
 
 def desativaMaquina(request, id):
     desativa = get_object_or_404(Maquina, id=id)
