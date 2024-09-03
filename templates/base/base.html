@@ -1,4 +1,6 @@
-<!doctype html>
+{% load static %}
+
+
 <html>
 <head>
   <meta charset="UTF-8">
@@ -15,43 +17,73 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body style="background-color: #f8f9fa">
-     <!-- Navbar -->
-    <nav class="bg-blue-900 p-4 fixed w-full z-10 top-0">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-white font-bold text-xl">Logo</a>
-            <div class="flex items-center">
-                <a href="#" class="text-white px-4">Home</a>
-                <a href="#" class="text-white px-4">About</a>
-                <a href="#" class="text-white px-4">Contact</a>
+<body>
+    <div class="flex h-screen" >
+        <aside class="h-full w-16 flex flex-col space-y-10 items-center justify-center text-white" style="background-color: #212231">
+            <div class="h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer hover:text-gray-800 hover:bg-white hover:duration-300 hover:ease-linear focus:bg-white">
+                <a href="/"><i class='bx bxs-home text-4xl'></i></a>
             </div>
-        </div>
-    </nav>
-
-    <div class="flex">
-        <!-- Sidebar Container -->
-        <div id="sidebar" class="bg-blue-800 text-white w-64 space-y-6 py-7 px-2 fixed inset-y-0 left-0 z-10">
-            <!-- Sidebar Content -->
-            <a href="/" class="text-white flex items-center space-x-2 px-4 py-2">
-                <span>Dashboard</span>
-            </a>
-            <a href="{% url 'createMaq' %}" class="text-white flex items-center space-x-2 px-4 py-2">
-                <span>Maquinas</span>
-            </a>
-            <a href="#" class="text-white flex items-center space-x-2 px-4 py-2">
-                <span>Settings</span>
-            </a>
-            <a href="#" class="text-white flex items-center space-x-2 px-4 py-2">
-                <span>Profile</span>
-            </a>
-        </div>
-
-        <!-- Main Content -->
-        <div class="flex-1 ml-64">
+            <div class="h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer hover:text-gray-800 hover:bg-white hover:duration-300 hover:ease-linear focus:bg-white">
+                <i class='bx bx-support text-4xl'></i>
+            </div>
+            <div class="h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer hover:text-gray-800 hover:bg-white hover:duration-300 hover:ease-linear focus:bg-white">
+                <i class='bx bxs-info-circle text-4xl'></i>
+            </div>
+            <div class="h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer hover:text-gray-800 hover:bg-white hover:duration-300 hover:ease-linear focus:bg-white">
+                <i class='bx bxs-user text-4xl'></i>
+            </div>
+        </aside>
+        <aside class="h-full w-72 flex flex-col space-y-4 p-4 text-gray-800" style="background-color: #466A85">
+            <div>
+                <img src="{% static 'img/logo_rotoline.svg' %}">
+                <hr class="bg-white">
+                <ul class="flex flex-col py-4 space-y-1">
+                    <li class="px-5">
+                      <div class="flex flex-row items-center h-8">
+                        <div class="text-lg font-semibold tracking-wide text-white">CADASTROS</div>
+                      </div>
+                    </li>
+                    <li>
+                        <a href="{% url 'createMaq' %}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-400 text-white hover:text-gray-800 border-l-4 border-transparent hover:border-white pr-6">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <i class='bx bxs-cog text-2xl'></i>
+                            </span>
+                            <span class="ml-2 text-sm tracking-wide truncate">Máquinas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-400 text-white hover:text-gray-800 border-l-4 border-transparent hover:border-white pr-6">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <i class='bx bx-cube text-2xl'></i>
+                            </span>
+                            <span class="ml-2 text-sm tracking-wide truncate">Modelos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-400 text-white hover:text-gray-800 border-l-4 border-transparent hover:border-white pr-6">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <i class='bx bx-wrench text-2xl'></i>
+                            </span>
+                            <span class="ml-2 text-sm tracking-wide truncate">Equipamentos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-400 text-white hover:text-gray-800 border-l-4 border-transparent hover:border-white pr-6">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <i class='bx bxs-hard-hat text-2xl'></i>
+                            </span>
+                            <span class="ml-2 text-sm tracking-wide truncate">Manutenção</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <div class="flex-1 p-6">
             {% block content %}
 
             {% endblock %}
         </div>
     </div>
 </body>
+
 </html>
