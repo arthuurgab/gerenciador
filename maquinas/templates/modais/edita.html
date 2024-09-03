@@ -1,5 +1,5 @@
 {% load widget_tweaks %}
-<form method="post" action="{% url 'editar' e.id %}">
+<form method="post" id="updateForm">
     {% csrf_token %}
     <div class="flex-auto p-5 lg:p-10">
         <div class="relative w-full mb-3">
@@ -47,7 +47,3 @@
         </button>
     </div>
 </form>
-
-<script>
-
-</script>

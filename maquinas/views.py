@@ -19,22 +19,6 @@ def createMaquina(request):
     exibeMaquina = Maquina.objects.order_by('numeroSerie')
     return render(request, 'createMaquina.html', {"MaquinaForm": form, "exibeMaquina": exibeMaquina})
 
-
-def createUpdate(request, id):
-    maquina = get_object_or_404(Maquina, id=id)
-    print(maquina)
-    if request.method == "POST":
-        form = MaquinaUpdate(request.POST, instance=maquina)
-
-        if form.is_valid():
-            form.save()
-            return redirect(reverse('createMaq'))
-    else:
-        form = MaquinaUpdate(instance=maquina)
-
-    maquinas = Maquina.objects.order_by('numeroSerie')
-    return JsonResponse()
-
 def desativaMaquina(request, id):
     desativa = get_object_or_404(Maquina, id=id)
     if desativa.status == 0:
